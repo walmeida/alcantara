@@ -84,6 +84,30 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Admin</h1>
 
+          <form class="form-horizontal" method="POST" action="#">
+            <h2>Nova Postagem</h2>
+
+            <div class="form-group">
+              <label for="inputTitulo" class="col-sm-2 control-label">Título</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputTitulo" name="inputTitulo" placeholder="Título" autofocus>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputTexto" class="col-sm-2 control-label">Texto</label>
+              <div class="col-sm-8">
+                <textarea id="inputTexto" name="inputTexto" class="form-control" rows="3" placeholder="Texto da Postagem"></textarea>
+              </div>
+            </div>
+                        
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-8">
+                <button type="submit" class="btn btn-default">Postar</button>
+              </div>
+            </div>
+            
+          </form>
           
         </div>
       </div>
