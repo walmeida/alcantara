@@ -219,10 +219,12 @@
             <p class="text-center"><span class="sidebar-title">INSCREVA-SE!</span></p>
             
             <div class="row">
-              <p>Receba as últimas novidades e promoções primeiro!</p>
+              <p class="text-center">Receba as últimas novidades e promoções primeiro!</p>
 
               <form>
-                <input type="text" id="email_inscricao" placeholder="seu e-mail" />
+                <div class="form-group">
+                  <input type="text" id="email_inscricao" placeholder="seu e-mail" />
+                </div>
               </form>
             </div>
 
