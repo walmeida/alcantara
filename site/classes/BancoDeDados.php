@@ -23,6 +23,10 @@
 			if ($conn->connect_error) {
 			    die("Erro de conexão com o Banco de Dados " . $conn->connect_error);
 			}
+
+			if (!$conn->set_charset("utf8")) {
+    			die("Erro ao carregar character set utf8: %s\n" . $conn->error);
+			}
 			
 			return $conn;	
 	    }
