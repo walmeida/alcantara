@@ -84,45 +84,6 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Admin</h1>
 
-          <form class="form-horizontal" method="POST" action="postar.php" enctype="multipart/form-data">
-            <h2>Nova Postagem</h2>
-
-            <div class="form-group">
-              <label for="inputTitulo" class="col-sm-2 control-label">Título</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputTitulo" name="inputTitulo" placeholder="Título" autofocus>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="inputFoto" class="col-sm-2 control-label">Foto</label>
-              <div class="col-sm-8">
-                <input type="file" class="form-control" id="inputFoto" name="inputFoto" placeholder="Foto">
-                <p class="help-block">Escolha a foto da sua postagem</p>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="inputTexto" class="col-sm-2 control-label">Texto</label>
-              <div class="col-sm-8">
-                <textarea id="inputTexto" name="inputTexto" class="form-control" rows="4" placeholder="Texto da Postagem"></textarea>
-              </div>
-            </div>
-                        
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-8">
-                <button type="submit" class="btn btn-default">Postar</button>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-8">
-                <p class="bg-success"><?php if(isset($_GET['postado']) && $_GET['postado'] == 'ok'){ echo "Postagem realizada com sucesso!"; }  ?></p>
-                <p class="bg-danger"><?php if(isset($_GET['postado']) && $_GET['postado'] == 'erro'){ echo "Ocorreu um erro ao realizar a Postagem!"; }  ?></p>
-              </div>
-            </div>
-
-          </form>
           
         </div>
       </div>
