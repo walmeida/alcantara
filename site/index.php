@@ -54,44 +54,57 @@
     ================================================== -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
+      <?php
+        include_once('comum/config.php');
+        $bd = BancoDeDados::getInstance();
+        $conn = $bd->getConexao();
+
+        $query = "SELECT b.* FROM banners b ORDER BY b.ordem LIMIT 3";
+
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+      ?>
       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
+      <?php
+        for($i=0; $i < $result->num_rows; $i++){
+          if($i==0){
+            echo "<li data-target=\"#myCarousel\" data-slide-to=\"$i\" class=\"active\"></li>";
+          }
+          else{
+            echo "<li data-target=\"#myCarousel\" data-slide-to=\"$i\"></li>"; 
+          }
+        }
+      ?>
       </ol>
+
       <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img class="first-slide img-responsive center-block" src="img/banner1.png" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <p><span class="carousel-title">50 TONS DE PINK</span></p>
+        <?php
+          $classes = ['first-slide','second-slide','third-slide'];
+          $cont = 0;
+          while ($linha = $result->fetch_assoc()) {
+        ?>
+            <div class="item <?php if($cont==0) echo 'active'; ?>">
+              <img class="<?php echo $classes[$cont]; ?> img-responsive center-block" src="<?php echo $linha['uri_imagem']; ?>" alt="<?php echo $linha['titulo']; ?>">
+              <div class="container">
+                <div class="carousel-caption">
+                  <p><span class="carousel-title"><?php echo $linha['titulo']; ?></span></p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="second-slide img-responsive center-block" src="img/banner1.png" alt="Second slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <p><span class="carousel-title">51 TONS DE PINK</span></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <img class="third-slide img-responsive center-block" src="img/banner1.png" alt="Third slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <p><span class="carousel-title">52 TONS DE PINK</span></p>
-            </div>
-          </div>
-        </div>
+        <?php
+            $cont++;
+          }
+        ?>
       </div>
       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <span class="sr-only">Anterior</span>
       </a>
       <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+        <span class="sr-only">Próximo</span>
       </a>
     </div><!-- /.carousel -->
 
@@ -108,9 +121,6 @@
         <div class="col-sm-8 blog-main">
 
           <?php
-              include_once('comum/config.php');
-              $bd = BancoDeDados::getInstance();
-              $conn = $bd->getConexao();
 
               $query = "SELECT p.*, u.primeiro_nome, u.ultimo_nome FROM posts p INNER JOIN usuarios u WHERE p.id_autor = u.id ORDER BY p.timestamp DESC LIMIT 3";
 
