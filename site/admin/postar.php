@@ -16,7 +16,7 @@
 	$uriImagem = $novo_arquivo;
 	
 	$titulo = filter_var($_POST['inputTitulo'], FILTER_SANITIZE_STRING);
-	$texto = filter_var($_POST['inputTexto'], FILTER_SANITIZE_STRING);
+	$texto = $_POST['inputTexto'];
 	$idAutor = filter_var($usuarioLogado->getId(), FILTER_SANITIZE_NUMBER_INT);
 
 	$post = new Post($titulo, $uriImagem, $texto, $idAutor);

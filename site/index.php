@@ -59,7 +59,7 @@
         $bd = BancoDeDados::getInstance();
         $conn = $bd->getConexao();
 
-        $query = "SELECT b.* FROM banners b ORDER BY b.ordem LIMIT 3";
+        $query = "SELECT b.* FROM banners b WHERE b.ativo = 1 ORDER BY b.ordem LIMIT 3";
 
         $stmt = $conn->prepare($query);
         $stmt->execute();

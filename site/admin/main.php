@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -67,6 +66,7 @@
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Posts</a></li>
+            <li><a href="banners.php">Banners</a></li>
           </ul>
           <!--<ul class="nav nav-sidebar">
             <li><a href="">Nav item</a></li>

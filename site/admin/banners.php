@@ -33,7 +33,19 @@
       session_start();
       if(!isset($_SESSION["usuarioLogado"])){
         header('Location: index.php?erro=2');
-      } 
+      }
+
+      include_once('../comum/config.php');
+      $bd = BancoDeDados::getInstance();
+      $conn = $bd->getConexao();
+
+      $query = "SELECT b.* FROM banners b ORDER BY b.ordem";
+
+      $stmt = $conn->prepare($query);
+      $stmt->execute();
+
+      $result = $stmt->get_result();
+
     ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -130,6 +142,36 @@
             </div>
 
           </form>
+
+          <h2 class="sub-header">Banners</h2>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Imagem</th>
+                  <th>Título</th>
+                  <th>Ordem</th>
+                  <th colspan="2">Ativo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  while ($linha = $result->fetch_assoc()) {
+                    echo '<tr>';
+                    echo '<td>' . $linha['id'] .'</td>';
+                    echo '<td><img src="../' . $linha['uri_imagem'] .'" class="img-max-w img-thumbnail"></td>';
+                    echo '<td>' . $linha['titulo'] .'</td>';
+                    echo '<td>' . $linha['ordem'] .'</td>';
+                    $ativo = ($linha['ativo'] == 1) ? 'Sim' : 'Não';
+                    echo '<td>' . $ativo . '</td>';
+                    echo '</tr>';
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
           
         </div>
       </div>
