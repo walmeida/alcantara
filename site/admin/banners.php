@@ -76,9 +76,9 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li><a href="main.php">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="main.php">Home</a></li>
             <li><a href="posts.php">Posts</a></li>
-            <li class="active"><a href="#">Banners</a></li>
+            <li class="active"><a href="#">Banners <span class="sr-only">(current)</span></a></li>
           </ul>
           <!--<ul class="nav nav-sidebar">
             <li><a href="">Nav item</a></li>

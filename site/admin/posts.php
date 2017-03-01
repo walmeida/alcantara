@@ -34,7 +34,19 @@
       session_start();
       if(!isset($_SESSION["usuarioLogado"])){
         header('Location: index.php?erro=2');
-      } 
+      }
+
+      include_once('../comum/config.php');
+      $bd = BancoDeDados::getInstance();
+      $conn = $bd->getConexao();
+
+      $query = "SELECT p.*, u.primeiro_nome, u.ultimo_nome FROM posts p INNER JOIN usuarios u WHERE p.id_autor = u.id ORDER BY p.timestamp DESC";
+
+      $stmt = $conn->prepare($query);
+      $stmt->execute();
+
+      $result = $stmt->get_result();
+
     ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -65,8 +77,9 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Posts</a></li>
+            <li><a href="main.php">Home</a></li>
+            <li class="active"><a href="#">Posts <span class="sr-only">(current)</span></a></li>
+            <li><a href="banners.php">Banners</a></li>
           </ul>
           <!--<ul class="nav nav-sidebar">
             <li><a href="">Nav item</a></li>
@@ -84,7 +97,38 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Admin</h1>
 
-          
+          <h2 class="sub-header">Posts</h2>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Imagem</th>
+                  <th>Título</th>
+                  <th>Texto (prévia)</th>
+                  <th>Data / Hora</th>
+                  <th colspan="2">Autor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                  while ($linha = $result->fetch_assoc()) {
+                    echo '<tr>';
+                    echo '<td>' . $linha['id'] .'</td>';
+                    echo '<td><img src="../' . $linha['uri_imagem'] .'" class="img-max-w img-thumbnail"></td>';
+                    echo '<td>' . $linha['titulo'] .'</td>';
+                    $texto = (strlen($linha['texto']) > 20) ? substr($linha['texto'],0,20) . '...' : $linha['texto'];
+                    echo '<td>' . $texto .'</td>';
+                    echo '<td>' . date('j/m/Y - H:i:s', strtotime($linha['timestamp'])) . '</td>';
+                    echo '<td>' . $linha['primeiro_nome'] . ' ' . $linha['ultimo_nome'] . '</td>';
+                    echo '</tr>';
+                  }
+                ?>
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
     </div>

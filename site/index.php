@@ -133,7 +133,7 @@
           ?>
               <div class="blog-post">
                 <h2 class="blog-post-title"><?php echo $linha['titulo']; ?></h2>
-                <p class="blog-post-meta text-center">em <?php echo date('j/m/Y', strtotime($linha['timestamp'])); ?> por <a href="#"><?php echo $linha['primeiro_nome'] . ' ' . $linha['ultimo_nome']; ?></a></p>
+                <p class="blog-post-meta text-center">em <?php echo date('d/m/Y', strtotime($linha['timestamp'])); ?> por <a href="#"><?php echo $linha['primeiro_nome'] . ' ' . $linha['ultimo_nome']; ?></a></p>
 
                 <?php
                   if(!is_null($linha['uri_imagem'])){
